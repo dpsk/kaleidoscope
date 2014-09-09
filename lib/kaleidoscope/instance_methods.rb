@@ -8,6 +8,9 @@ module Kaleidoscope
 
     def generate_colors
       if has_colors_configured?
+
+        destroy_colors
+
         Kaleidoscope.log("Generating colors for #{self.class.model_name}.")
 
         histogram = generate_histogram_for(magick_image)
@@ -45,6 +48,7 @@ module Kaleidoscope
 
     def destroy_colors
       Kaleidoscope.log("Deleting colors for #{self.class.model_name}.")
+      color_class.where(school_id: self.id).each(&:destroy)
     end
 
     private
