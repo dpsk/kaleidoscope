@@ -34,7 +34,7 @@ module Kaleidoscope
           frequency_percentage = histogram_count_to_percentage(pixel[:histogram_count], frequency_total)
           original_hex = sanitize_hex(pixel[:original_hex])
           matched_hex = sanitize_hex(pixel[:matched_hex])
-          color_class.create(photo_id: self.id, original_color: original_hex, reference_color: matched_hex, frequency: frequency_percentage, distance: pixel[:distance])
+          color_class.create(school_id: self.id, original_color: original_hex, reference_color: matched_hex, frequency: frequency_percentage, distance: pixel[:distance])
         end
 
       else
