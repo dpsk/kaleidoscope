@@ -37,7 +37,7 @@ module Kaleidoscope
           frequency_percentage = histogram_count_to_percentage(pixel[:histogram_count], frequency_total)
           original_hex = sanitize_hex(pixel[:original_hex])
           matched_hex = sanitize_hex(pixel[:matched_hex])
-          color_class.create(school_id: self.id, original_color: original_hex, reference_color: matched_hex, frequency: frequency_percentage, distance: pixel[:distance])
+          color_class.create("#{kaleidoscope_config.association_key}" => self.id, original_color: original_hex, reference_color: matched_hex, frequency: frequency_percentage, distance: pixel[:distance])
         end
 
       else
@@ -48,7 +48,7 @@ module Kaleidoscope
 
     def destroy_colors
       Kaleidoscope.log("Deleting colors for #{self.class.model_name}.")
-      color_class.where(school_id: self.id).each(&:destroy)
+      color_class.where("#{kaleidoscope_config.association_key}" => self.id).delete_all
     end
 
     private
@@ -109,10 +109,7 @@ module Kaleidoscope
     end
 
     def magick_image
-      @magick_image ||= read_image_into_imagemagick(magick_image_url)
-    end
-
-    def magick_image_url
+      @magick_image ||= read_image_into_imagemagick(send(kaleidoscope_config.image_method))
     end
 
     def distance_between(pixel: pixel, match: match)

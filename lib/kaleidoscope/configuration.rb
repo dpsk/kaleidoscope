@@ -14,5 +14,7 @@ module Kaleidoscope
 
     # Number of colors for output
     attr_accessor :number_of_colors
+    attr_accessor :image_method
+    attr_accessor :association_key
   end
 end

@@ -21,8 +21,7 @@ module Kaleidoscope
   module ClassMethods
     def has_colors
       include InstanceMethods
-
-      after_commit :generate_colors
+      after_commit :generate_colors, if: ->(record){ record.respond_to?(:generate_colors?) ? record.generate_colors? : true }
       after_destroy :destroy_colors
     end
 

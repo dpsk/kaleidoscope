@@ -10,4 +10,10 @@ Kaleidoscope.configure do |config|
 
   # Number of colors to be stored in the database
   config.number_of_colors = 5
+
+  # Foreign key for association
+  config.association_key = "photo_id"
+
+  # method to retrieve image
+  config.image_method = "display_logo"
 end
