@@ -121,6 +121,13 @@ def index
   @photos = Photo.all.with_color(params[:color])
 end
 ```
+You can add ```generate_colors?``` method to your paperclip model, based on this method kaleidoscope will decide if new colors needs to be generated. By default colors generated every update, even if attachment stays the same.
+
+```ruby
+  def generate_colors?
+    avatar_updated_at_changed?
+  end
+```
 
 To refresh the color database:
 
