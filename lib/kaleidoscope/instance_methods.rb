@@ -105,12 +105,15 @@ module Kaleidoscope
     end
 
     def magick_image
-      @magick_image ||= read_image_into_imagemagick(self.image.url)
+      @magick_image ||= read_image_into_imagemagick(magick_image_url)
+    end
+
+    def magick_image_url
     end
 
     def distance_between(pixel: pixel, match: match)
       pixel_color = color_from(pixel)
-      pixel_color.distance_from(match)     
+      pixel_color.distance_from(match)
     end
 
     def hex_from_pixel(pixel)
